@@ -12,3 +12,9 @@ client.connect(err => {
   client.close();
 });
 -----------------------------------------------------------------------------------
+email validation if needed : 
+  - https://stackoverflow.com/questions/21842694/mongoose-validation-required-false-validate-regex-issues-with-empty-value
+  - https://stackoverflow.com/questions/18022365/mongoose-validate-email-syntax
+  - https://mongoosejs.com/docs/2.7.x/docs/validation.html
+-----------------------------------------------------------------------------------
+
