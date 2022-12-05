@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.20"
+  },
+  "name": "bits-mhsg-rest-api",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikkiBot/bits-mhsg-rest-api.git"
+  },
+  "author": "Nishith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikkiBot/bits-mhsg-rest-api/issues"
+  },
+  "homepage": "https://github.com/nikkiBot/bits-mhsg-rest-api#readme"
+}
