@@ -3,7 +3,7 @@ const Post = require('../models/Post');
 // const brcypt = require('bcrypt');
 
 // CREATE POST
-router.post('/', async (req, res) => {
+router.post('/post', async (req, res) => {
     const newPost = new Post(req.body);
     try{
         const savedPost = await newPost.save(); //save() is a mongoose method
@@ -17,18 +17,13 @@ router.post('/', async (req, res) => {
 router.put("/:id", async (req, res) => {
     try{
         const post = await Post.findById(req.params.id); //findById is a mongoose method to find a post by its id, using await because it is an async function and we need to wait for the response
-        if(post.title === req.body.title){
-            try{
-                const updatedPost = await Post.findByIdAndUpdate(req.params.id, {
-                    $set: req.body //$set is a mongoose method to update the post to req.body
-                }, {new: true}); //new: true is a mongoose method to return the updated post 
-                res.status(200).json(updatedPost);
-            } catch(err){
-                res.status(500).json(err);
-            }
-        }
-        else {
-            res.status(401).json("You can update only your post");
+        try{
+            const updatedPost = await Post.findByIdAndUpdate(req.params.id, {
+                $set: req.body //$set is a mongoose method to update the post to req.body
+            }, {new: true}); //new: true is a mongoose method to return the updated post 
+            res.status(200).json(updatedPost);
+        } catch(err){
+            res.status(500).json(err);
         }
     } catch(err) {
         res.status(500).json(err);
@@ -66,7 +61,7 @@ router.get("/", async (req, res) => {
             posts = await Post.find({postAuthor}); //find() is a mongoose method to find a post by its author
         }
         else if(postTitle){
-            posts = await Post.find({title: {$regex: postTitle}}); //find() is a mongoose method to find a post by its title
+            posts = await Post.find({title: {$regex: postTitle}}); //find() is a mongoose method to find a post by its title and 
         }
         else{ //if there is no query, then we return all the posts
             posts = await Post.find();

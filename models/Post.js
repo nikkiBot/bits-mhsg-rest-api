@@ -7,6 +7,11 @@ const PostSchema = new mongoose.Schema(
             required: true,
             unique: true
         },
+        postID :{
+            type : String,
+            unique : true,
+            required: true,
+        },
         postDescription: {
             type: String,
             required: true

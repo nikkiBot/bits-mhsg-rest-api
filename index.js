@@ -12,8 +12,7 @@ app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
+    useUnifiedTopology: true
 }).then(console.log("Connected to MongoDb")).catch((err)=>console.log(err));
 
 const imgstorage = multer.diskStorage({
@@ -34,7 +33,6 @@ const upload = multer({storage: imgstorage});
 /**
  * @brief Returns middleware that processes a single file associated with the given form field. The file is stored in req.file.
  * @route POST /api/upload
- * @access Public
  * @param {file} file
  * @returns {json} json
  */
