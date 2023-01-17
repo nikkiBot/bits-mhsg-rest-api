@@ -9,7 +9,7 @@ const PostSchema = new mongoose.Schema(
         },
         postID :{
             type : String,
-            unique : true,
+            unique : true,  
             required: true,
         },
         postDescription: {
@@ -23,6 +23,10 @@ const PostSchema = new mongoose.Schema(
         postAuthor: {
             type: String,
             required: true
+        },
+        postCategories: {
+            type: Array,
+            required: false,
         }
     },
     { timestamps: true} // This will automatically add the createdAt and the updatedAt field for us, a different object from our Post object itself in PostSchema

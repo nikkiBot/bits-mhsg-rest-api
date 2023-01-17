@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Post = require('../models/Post');
+const PostCategory = require('../models/PostCategory');
 // const brcypt = require('bcrypt');
 
 // CREATE POST
@@ -55,6 +56,7 @@ router.delete("/:id", async (req, res) => {
 router.get("/", async (req, res) => {
     const postAuthor = req.query.postAuthor;
     const postTitle = req.query.title;
+
     try{
         let posts; //posts is an array of posts
         if(postAuthor){
@@ -62,6 +64,11 @@ router.get("/", async (req, res) => {
         }
         else if(postTitle){
             posts = await Post.find({title: {$regex: postTitle}}); //find() is a mongoose method to find a post by its title and 
+        }
+        else if(postCategory){
+            posts = await Post.find({
+                categories: { $in: [PostCategory] } //find all posts that belong to same category as the one we are looking for
+            })
         }
         else{ //if there is no query, then we return all the posts
             posts = await Post.find();
@@ -83,5 +90,19 @@ router.get("/:id", async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+//Get posts by category
+router.get("/category/:category", async (req, res) => {
+    try{
+        const posts = await Post.find({
+            categories: { $in: [req.params.category] } //find all posts that belong to same category as the one we are looking for
+        })
+        res.status(200).json(posts);
+    }  
+    catch(err){
+        res.status(500).json(err);
+    }
+});
+
 
 module.exports = router;
